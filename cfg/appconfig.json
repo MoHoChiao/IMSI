@@ -1,0 +1,5 @@
+{
+	"#dms_redis_server_host" : "10.108.61.129",
+	"dms_redis_server_host" : "localhost",
+	"dms_redis_server_port" : 6379
+}

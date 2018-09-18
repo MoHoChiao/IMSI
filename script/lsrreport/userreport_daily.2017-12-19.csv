@@ -1,0 +1,89 @@
+Date,eNB--MME,total record,total IMSI,IMSI rate,Note
+2017-12-11,session amount of EE,25185891,25134192,99.79%,
+2017-12-11,session amount of EN,78721788,76642024,97.36%,
+2017-12-11,sum of total ERT eNB,103907679,101776216,97.95%,used in LSR IMSI matching
+2017-12-11,session amount of NE,87117,87002,99.87%,
+2017-12-11,session amount of NN,494266853,483822349,97.89%,
+2017-12-11,sum of total NSN eNB,494353970,483909351,97.89%,
+2017-12-11,total E + N,598261649,585685567,97.90%,used in DMS output reports
+2017-12-11,sum of total ERT MME,25273008,25221194,99.79%,
+2017-12-11,sum of total NSN MME,572988641,560464373,97.81%,
+2017-12-11,IMSI mapping rate form R930,,,79.51%,
+2017-12-11,IMEI mapping rate form R930,,,80.32%,
+2017-12-12,session amount of EE,25097678,25037886,99.76%,
+2017-12-12,session amount of EN,71417802,68983147,96.59%,
+2017-12-12,sum of total ERT eNB,96515480,94021033,97.42%,used in LSR IMSI matching
+2017-12-12,session amount of NE,76063,75936,99.83%,
+2017-12-12,session amount of NN,503892870,490113136,97.27%,
+2017-12-12,sum of total NSN eNB,503968933,490189072,97.27%,
+2017-12-12,total E + N,600484413,584210105,97.29%,used in DMS output reports
+2017-12-12,sum of total ERT MME,25173741,25113822,99.76%,
+2017-12-12,sum of total NSN MME,575310672,559096283,97.18%,
+2017-12-12,IMSI mapping rate form R930,,,78.88%,
+2017-12-12,IMEI mapping rate form R930,,,79.65%,
+2017-12-13,session amount of EE,24978091,24905372,99.71%,
+2017-12-13,session amount of EN,71797349,68551971,95.48%,
+2017-12-13,sum of total ERT eNB,96775440,93457343,96.57%,used in LSR IMSI matching
+2017-12-13,session amount of NE,68660,68445,99.69%,
+2017-12-13,session amount of NN,504896596,486670569,96.39%,
+2017-12-13,sum of total NSN eNB,504965256,486739014,96.39%,
+2017-12-13,total E + N,601740696,580196357,96.42%,used in DMS output reports
+2017-12-13,sum of total ERT MME,25046751,24973817,99.71%,
+2017-12-13,sum of total NSN MME,576693945,555222540,96.28%,
+2017-12-13,IMSI mapping rate form R930,,,78.99%,
+2017-12-13,IMEI mapping rate form R930,,,79.81%,
+2017-12-14,session amount of EE,25109336,25051709,99.77%,
+2017-12-14,session amount of EN,70223891,67993083,96.82%,
+2017-12-14,sum of total ERT eNB,95333227,93044792,97.60%,used in LSR IMSI matching
+2017-12-14,session amount of NE,72366,72220,99.80%,
+2017-12-14,session amount of NN,506621812,493677793,97.45%,
+2017-12-14,sum of total NSN eNB,506694178,493750013,97.45%,
+2017-12-14,total E + N,602027405,586794805,97.47%,used in DMS output reports
+2017-12-14,sum of total ERT MME,25181702,25123929,99.77%,
+2017-12-14,sum of total NSN MME,576845703,561670876,97.37%,
+2017-12-14,IMSI mapping rate form R930,,,78.83%,
+2017-12-14,IMEI mapping rate form R930,,,79.63%,
+2017-12-15,session amount of EE,25134859,25052648,99.67%,
+2017-12-15,session amount of EN,67326010,64096408,95.20%,
+2017-12-15,sum of total ERT eNB,92460869,89149056,96.42%,used in LSR IMSI matching
+2017-12-15,session amount of NE,87975,87687,99.67%,
+2017-12-15,session amount of NN,517103446,495886165,95.90%,
+2017-12-15,sum of total NSN eNB,517191421,495973852,95.90%,
+2017-12-15,total E + N,609652290,585122908,95.98%,used in DMS output reports
+2017-12-15,sum of total ERT MME,25222834,25140335,99.67%,
+2017-12-15,sum of total NSN MME,584429456,559982573,95.82%,
+2017-12-15,IMSI mapping rate form R930,,,76.91%,
+2017-12-15,IMEI mapping rate form R930,,,77.79%,
+2017-12-16,session amount of EE,25544551,25470844,99.71%,
+2017-12-16,session amount of EN,65873755,63176173,95.90%,
+2017-12-16,sum of total ERT eNB,91418306,88647017,96.97%,used in LSR IMSI matching
+2017-12-16,session amount of NE,88875,88644,99.74%,
+2017-12-16,session amount of NN,498897440,481170491,96.45%,
+2017-12-16,sum of total NSN eNB,498986315,481259135,96.45%,
+2017-12-16,total E + N,590404621,569906152,96.53%,used in DMS output reports
+2017-12-16,sum of total ERT MME,25633426,25559488,99.71%,
+2017-12-16,sum of total NSN MME,564771195,544346664,96.38%,
+2017-12-16,IMSI mapping rate form R930,,,77.74%,
+2017-12-16,IMEI mapping rate form R930,,,78.56%,
+2017-12-17,session amount of EE,25140543,25075478,99.74%,
+2017-12-17,session amount of EN,63262075,61074982,96.54%,
+2017-12-17,sum of total ERT eNB,88402618,86150460,97.45%,used in LSR IMSI matching
+2017-12-17,session amount of NE,81490,81315,99.79%,
+2017-12-17,session amount of NN,483608520,469523624,97.09%,
+2017-12-17,sum of total NSN eNB,483690010,469604939,97.09%,
+2017-12-17,total E + N,572092628,555755399,97.14%,used in DMS output reports
+2017-12-17,sum of total ERT MME,25222033,25156793,99.74%,
+2017-12-17,sum of total NSN MME,546870595,530598606,97.02%,
+2017-12-17,IMSI mapping rate form R930,,,77.7%,
+2017-12-17,IMEI mapping rate form R930,,,78.59%,
+2017-12-18,session amount of EE,24952023,24901721,99.80%,
+2017-12-18,session amount of EN,65358296,63556742,97.24%,
+2017-12-18,sum of total ERT eNB,90310319,88458463,97.95%,used in LSR IMSI matching
+2017-12-18,session amount of NE,71314,71174,99.80%,
+2017-12-18,session amount of NN,506013747,494348752,97.69%,
+2017-12-18,sum of total NSN eNB,506085061,494419926,97.70%,
+2017-12-18,total E + N,596395380,582878389,97.73%,used in DMS output reports
+2017-12-18,sum of total ERT MME,25023337,24972895,99.80%,
+2017-12-18,sum of total NSN MME,571372043,557905494,97.64%,
+2017-12-18,IMSI mapping rate form R930,,,79.66%,
+2017-12-18,IMEI mapping rate form R930,,,80.48%,

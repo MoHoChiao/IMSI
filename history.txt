@@ -1,0 +1,167 @@
+﻿2018 0910
+* DMSReader jedis read time out 增加到 30 秒
+* DMSFileProcessor 加上ail retry 3 次機制
+* DMSReader 只會處理最近一小時的資料
+
+2018 0530
+* 修正 DMSReader 及 LSRReader 資料時間差的問題，改為在 DMSReader 確實將資料 import 到 redis 後，才會執行 LSRReader mapping
+* LSRReader 改為每 60 秒執行一次
+
+  
+2018 0522
+因為 Jedis 有 Read timed out 的問題，所以做以下變更
+* loader 跟 reader 之間，完全不使pub/sub 機制通知，改為純用 timer 觸發
+Note:
+    * DMSLoader 每 20 秒執行一次
+    * DMSReader 每 30 秒執行一次
+    * LSRLoader 每 60 秒執行一次
+    * LSRReader 每 90 秒執行一次 
+
+2017 1117
+更改 key 為只有 MME ID
+部署程序
+1) 停止 LSRReader V
+2) 停止 DMSReader V
+3) 刪除 DMSReader 的產出檔 20 分鐘 V
+4) 更新 DMSReader V
+5) 更新 LSRReader V
+6) 啟動 LSRReader V
+6) 更新 DMSReporter
+
+2017 0929
+* 更新 opencsv 到 3.9 版
+* 更改 quote 字元為 '\01'
+
+2017 0929
+* LSR Daily Report 新增 Session Error Count, DMS Match, DMS Match Rate 欄位
+* DMS Daily Report 新增 Session Error Count 欄位
+* DMS Key Flag Report 新增 Key Flag 欄位
+==>
+DMS Matched :==: total number of LSR key mapped with DMS
+Keyed DMS Matched rate :==: DMS Matched / LSR with key
+DMS Matched rate :==: DMS Matched / total LSR
+
+2017 0929
+* LSR Key Mapped With DMS = (Total - LSR No Key - DMS Not Match)/Total
+* Current-Max IMSI rate = (LSR Key mapped rate with DMS) x (ERT IMSI rate) * (DMS Key Rate)
+* 避免對 LSR/DMS 錯誤檔案重複處理
+* LSRReader 修正重跑 file 時，未重設 counter 的錯誤
+
+2017 0924
+加入 DMS 加入 key flay:
+以下是目前eNB, MME的IP配置，請參考此配置給flag, 建議使用1/2 or N/E來標註NSN/ERT
+
+++++++++++++++++++++++++++++
+DMS: 10.108.61.155
+ERT eNB IP: 10.11*.*.*
+NSN eNB IP: 10.10*.*.*
+ERT MME IP: 10.106.24.16
+NSN MME IP: 172.24.41.137
+
+DMS: 10.108.61.167
+ERT eNB IP: 10.11*.*.*
+NSN eNB IP: 10.10*.*.*
+ERT MME IP: 10.106.16.16
+NSN MME IP: 172.28.41.137
+++++++++++++++++++++++
+
+
+2017 0923
+* 修正 LSR statFile 有時沒有產生的情況
+
+2017 0921
+* 修正組 key 時 start_mme_id 沒有判斷到不為空值的情況
+
+2017 0917
+* 修正 IMSI Mapping 結果的 IMSI 欄位，沒有帶到原本 LSR IMSI 即不為空的情形
+* LSR Reader 新增 DMS Not Match
+* LSR Report 新增 DMS Not Match，DMS Not Match Rate
+
+2017 0916
+* 修正 (LSR & DMS) jedis pipeline 執行 sync 時，發生的 JedisConnectionException 的錯誤(需觀察結果)
+
+2017 0913
+* LSR 改成會 sync 5 小時內的資料, 因為 DMS 資料只會保留 6 小時，sync 太舊的資料過來，也可能 DMS 那邊的 key 反而對不到
+
+2017 0907
+* DMS Reader 移除每個匹次最大 10 分鐘的限制
+
+2017 0907
+* DMS Report 加 File Error/File Count 註記 V
+* DMS Report 加 Key 及 IMEI Rate V
+* DMS Report 加 Sync Time V
+* LSR Report 加 File Error/File Count 註記 V
+* LSR Report 加 Sync Time V
+  
+2017 0830
+* 修正 IMEI 回補寫錯欄位的錯誤
+
+2017 0824
+* LSRReader 加上 IMEI 回補機制 -- deploy OK
+* LSRReport 加上 IMEI Mapped/ NewIMEI Rate -- deploy OK
+* LSRReport 加上 NewIMSI NO NewIMEI Count/Rate -- deploy OK
+* 為防止 LSR/DMSReader RedisSubscriber 失效，另加上 timer 機制定時觸發 -- deploy OK 
+
+2017 0819
+* LSRReader 加上 IMEI 回補機制 -- not deployed!
+* LSRReport 加上 NewIMSI NO NewIMEI Count/Rate -- not deployed!
+
+2017 0819
+* 為防止 LSR/DMSReader RedisSubscriber 失效，另加上 timer 機制定時觸發 -- not deployed!
+
+
+2017 0815
+* IMEI-IMSI Mapping IMEI key 統一為長度 14 (LSRReader, DMSReader)
+* 加上 IMSI-IMEI mapping (DMSReader)
+* 加上 NewIMSI No IMEI Count/Rate 及 IMEI No NewIMSI Count/Rate (LSRReader, LSRReporter)
+* 將 LSRLoader 改為每分鐘 rsync 一次，讓 DMS 更有機會在 LSR 查詢 imsi 前完成
+
+2017 0815
+* LSR Reader 多產出 *.mapping.csv 檔案
+* LSR stat.json 加入以底下 Count 欄位
+		KEY IMSI Mapping
+		IMEI IMSI Mapping
+		DMS IMSI Mapping
+		KEY NO IMSI Mapping
+		IMEI NO KEY Mapping
+* LSR report 及 LSR daily report 加入以底下 Count 及 Rate 欄位
+		KEY IMSI Mapping
+		IMEI IMSI Mapping
+		DMS IMSI Mapping
+		KEY NO IMSI Mapping
+		IMEI NO KEY Mapping
+
+2017 0814
+* LSR Reader/Report 加入 keyNoImeiCount, keyNoImsiCount, ImeiNoKeyCount, 
+  ImeiNoImsiCount, ImsiNoKeyCount, ImsiNoImeiCount 及 Rate 等欄位
+
+2017 0811
+* 修正 LSRReader 的作法，當 key-imsi 取得為 NA 或 null 時，會再從 imei-imsi 中取
+
+2017 0810
+* IMSI-IMEI mapping data 保存 2W -- OK
+* IMEI 對應 4 個 IMSI -- OK
+* DMS key for matching 保留 6h -- OK
+* LSR daily report 修正 IMEI Rate 誤值為 Key Rate 的錯誤
+* DMSFileReporter 的 redis pipeline batchsize = 500
+* redeploy DMSLoader, DMSReader, DMSReporter, LSRLoader, LSRReader, LSRReport
+
+2017 0809
+* 修復 DMSReport 檔案時間計算錯誤 -- OK
+* IMEI Mapping key-value query in LSR -- OK
+* bypass dmsloader, lsrloader jedis publish socket read time out -- Wait for deploy
+
+2017 0731
+* Key 值改以 Start_MME_UE_S1AP + Start_eNB_UE_S1AP 為主 (之前使用End)  -- OK
+* 新增 Start Type 跟 End Type 的統計欄位	-- OK
+* 加回 missing 檔 -- OK
+* 每天產生 daily IMSI report in csv
+* IMEI Mapping key-value query in LSR -- Marked
+
+2017 0723
+* keep entire DMS key-value list for 6 hours -- OK
+* add IMEI Mapping support
+	- IMEI Mapping key-value insert in DMS -- OK
+	- IMEI Mapping key-value query in LSR -- Marked
+	- Daily report summary
+
