@@ -16,8 +16,7 @@ import java.util.zip.GZIPInputStream;
 
 import com.opencsv.CSVWriter;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.Response;
 import tw.moze.imsi.redis.RedisUtil;
 import tw.moze.util.collection.CountableMap;
@@ -27,7 +26,8 @@ import tw.moze.util.fileformat.FieldCSVReader;
 import tw.moze.util.fileutil.FileExtUtils;
 import tw.moze.util.fileutil.FileUtils;
 import tw.moze.util.json.JsonUtil;
-import tw.moze.util.redis.RedisBatchRunner2;
+import tw.moze.imsi.redis.JedisClusterPipeline;
+import tw.moze.imsi.redis.RedisBatchRunner2;
 
 class LSRFileProcessor implements Runnable {
 	File srcFile, outFile, statFile;
@@ -178,14 +178,14 @@ class LSRFileProcessor implements Runnable {
 
 	private void processCSV() throws IOException {
 
-		Jedis jedis = null;
+		JedisCluster jedis = null;
 //		boolean fileError = false;
 		try {
 			reader = new FieldCSVReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(srcFile))), ',', '\01');
 			reader.readHeader();
 
 			jedis = RedisUtil.getResource();
-
+			
 			Map<String, Integer> headerMap = reader.getHeaderMap();
 			Integer imsiFieldIndex = headerMap.get("IMSI");
 			if (imsiFieldIndex == null) {
@@ -277,7 +277,7 @@ class LSRFileProcessor implements Runnable {
 			safeClose(writer);
 			safeClose(missingWriter);
 			safeClose(mappingWriter);
-			safeClose(jedis);
+//			safeClose(jedis);
 		}
 	}
 
@@ -315,12 +315,12 @@ class LSRFileProcessor implements Runnable {
 	 */
 	class IMSI_querier extends RedisBatchRunner2<IMSIQueryVO> {
 
-		public IMSI_querier(Jedis jedis, int batchSize) {
+		public IMSI_querier(JedisCluster jedis, int batchSize) {
 			super(jedis, batchSize);
 		}
 
 		@Override
-		public void invoke(Pipeline pipeline, String[] vals, List<IMSIQueryVO> results) {
+		public void invoke(JedisClusterPipeline pipeline, String[] vals, List<IMSIQueryVO> results) {
 
 			for (int i = 0; i < fieldsToRead.length; i++) {
 				String field = fieldsToRead[i];
@@ -585,12 +585,12 @@ class LSRFileProcessor implements Runnable {
 	 * @author edward
 	 */
 	class LSRMatchWriter extends RedisBatchRunner2<Void> {
-		public LSRMatchWriter(Jedis jedis, int batchSize) {
+		public LSRMatchWriter(JedisCluster jedis, int batchSize) {
 			super(jedis, batchSize);
 		}
 
 		@Override
-		public void invoke(Pipeline pipeline, String[] vals, List<Void> results) {
+		public void invoke(JedisClusterPipeline pipeline, String[] vals, List<Void> results) {
 			String mme_id = vals[0];
 			String enb_id = vals[1];
 			String imsi = vals[2];
@@ -608,12 +608,12 @@ class LSRFileProcessor implements Runnable {
      * @author edward
      */
     class IMEI_querier extends RedisBatchRunner2<IMEIQueryVO> {
-        public IMEI_querier(Jedis jedis, int batchSize) {
+        public IMEI_querier(JedisCluster jedis, int batchSize) {
             super(jedis, batchSize);
         }
 
         @Override
-        public void invoke(Pipeline pipeline, String[] vals, List<IMEIQueryVO> results) {
+        public void invoke(JedisClusterPipeline pipeline, String[] vals, List<IMEIQueryVO> results) {
             String imsi = reader.get("IMSI", vals);
             String imei = reader.get("IMEI", vals);
             IMEIQueryVO vo = new IMEIQueryVO();

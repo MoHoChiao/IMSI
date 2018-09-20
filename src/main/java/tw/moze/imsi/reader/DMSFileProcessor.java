@@ -13,8 +13,8 @@ import java.util.Map;
 
 import com.opencsv.CSVWriter;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.JedisCluster;
+import tw.moze.imsi.redis.JedisClusterPipeline;
 import tw.moze.imsi.redis.RedisUtil;
 import tw.moze.imsi.util.StatFile;
 import tw.moze.util.collection.CountableMap;
@@ -22,7 +22,7 @@ import tw.moze.util.concurrent.CountUpDownLatch;
 import tw.moze.util.dev.XXX;
 import tw.moze.util.fileformat.FieldCSVReader;
 import tw.moze.util.fileutil.FileExtUtils;
-import tw.moze.util.redis.RedisBatchRunner2;
+import tw.moze.imsi.redis.RedisBatchRunner2;
 import tw.moze.util.string.StringUtil;
 
 class DMSFileProcessor implements Runnable {
@@ -112,7 +112,7 @@ class DMSFileProcessor implements Runnable {
 	}
 
 	private void readCSV() throws IOException {
-		Jedis jedis = null;
+		JedisCluster jedis = null;
 		Map<String, Long> stat = new LinkedHashMap<>();
 		String statFile = FileExtUtils.newExtension(filteredFile, ".stat.json").getAbsolutePath();
 		long sessionError = 0L;
@@ -121,7 +121,7 @@ class DMSFileProcessor implements Runnable {
 			reader.readHeader();
 
 			jedis = RedisUtil.getResource();
-
+			
 			writer = new CSVWriter(new FileWriter(filteredFile));
 			String[] writerField = reader.getHeaderNames();
 			writerField = Arrays.copyOf(writerField, writerField.length + 1);
@@ -180,9 +180,7 @@ class DMSFileProcessor implements Runnable {
 		finally {
 			safeClose(reader);
 			safeClose(writer);
-			safeClose(jedis);
-			
-			
+//			safeClose(jedis);
 		}
 	}
 
@@ -249,13 +247,12 @@ class DMSFileProcessor implements Runnable {
 	}
 
 	class DMSDataWriter extends RedisBatchRunner2<Void> {
-
-		public DMSDataWriter(Jedis jedis, int batchSize) {
+		public DMSDataWriter(JedisCluster jedis, int batchSize) {
 			super(jedis, batchSize);
 		}
 
 		@Override
-		public void invoke(Pipeline pipeline, String[] vals, List<Void> results) {
+		public void invoke(JedisClusterPipeline pipeline, String[] vals, List<Void> results) {
 
 			String mme_id = reader.get("MME UE S1AP ID(int64)", vals);
 			String enb_id = reader.get("eNB UE S1AP ID(int64)", vals);
@@ -305,7 +302,7 @@ class DMSFileProcessor implements Runnable {
 
 		}
 
-		private void setKeyValue(Pipeline pipeline, List<Void> results, String key,
+		private void setKeyValue(JedisClusterPipeline pipeline, List<Void> results, String key,
 				String imsi, String val,
 				int listSize, int expireHours) {
 			if ("NA".equals(imsi)) {	// 如果是 NA, 放到最後

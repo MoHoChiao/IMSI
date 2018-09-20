@@ -1,5 +1,32 @@
 {
-	"#dms_redis_server_host" : "10.108.61.129",
-	"dms_redis_server_host" : "localhost",
-	"dms_redis_server_port" : 6379
+	"#dms_redis_server_host" : [
+		"10.108.61.129",
+		"10.108.61.129",
+		"10.108.61.129",
+		"10.108.61.129",
+		"10.108.61.171",
+		"10.108.61.171",
+		"10.108.61.171",
+		"10.108.61.171"
+	],
+	"dms_redis_server_host" : [
+		"localhost",
+		"localhost",
+		"localhost",
+		"localhost",
+		"localhost",
+		"localhost",
+		"localhost",
+		"localhost"
+	],
+	"dms_redis_server_port" : [
+		6380,
+		6381,
+		6382,
+		6383,
+		6384,
+		6385,
+		6386,
+		6387
+	]
 }

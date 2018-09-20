@@ -2,6 +2,8 @@ package tw.moze.core.conf;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -29,5 +31,19 @@ public class Config {
 				return null;
 		}
 		return obj;
+	}
+	
+	public static List<Object> getAsList(String path) {
+		List<Object> list = new ArrayList<Object>();
+		JsonNode objs = get(path);
+		if(null != objs && objs.isArray()) {
+			for(JsonNode obj : objs) {
+				if(obj.isInt())
+					list.add(obj.asInt());
+				else
+					list.add(obj.asText());
+			}
+		}
+		return list;
 	}
 }

@@ -1,12 +1,13 @@
 package tw.moze.imsi.reader;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 import tw.moze.imsi.redis.RedisUtil;
 import tw.moze.util.dev.XXX;
 
@@ -55,13 +56,13 @@ public class ReaderUtil {
 	private static String DMS_LAST_DATA_TIMSSTAMP = "dms_last_data";
 
 	public static void setRedisDataTime() {
-        Jedis jedis = null;
+		JedisCluster jedis = null;
         boolean done = false;
         SimpleDateFormat dfToSec = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         int count = 5;
         do {
 	        try {
-	            jedis = RedisUtil.getResource();
+	        	jedis = RedisUtil.getResource();
 	            Long dmsDataTime = getMaxDataTime();
 	            jedis.setex(DMS_LAST_DATA_TIMSSTAMP, 60 * 60 , String.valueOf(dmsDataTime));
 	            XXX.out("Set DMS Data Time to: " + dfToSec.format(new Date(dmsDataTime * 1000L)));
@@ -82,9 +83,11 @@ public class ReaderUtil {
 	        	}
 	        }
 	        finally {
-	            if (jedis != null) {
-	                jedis.close();
-	            }
+//	            if (jedis != null) {
+//	                try {
+//						jedis.close();
+//					} catch (IOException e) {}
+//	            }
 	        }
         } while(!done);
     }
@@ -93,12 +96,12 @@ public class ReaderUtil {
 	 * 當 DNS 還沒有設定 DataTime 或無法取回 DataTime 時，會傳回 -1；此時呼叫端要特別處理
 	 */
 	public static Long getRedisDataTime() {
-        Jedis jedis = null;
+        JedisCluster jedis = null;
         boolean done = false;
         int count = 5;
         do {
 	        try {
-	            jedis = RedisUtil.getResource();
+	        	jedis = RedisUtil.getResource();
 	            String v = jedis.get(DMS_LAST_DATA_TIMSSTAMP);
 	            if (v == null)
 	            	return -1L;
@@ -119,9 +122,11 @@ public class ReaderUtil {
 	        	}
 	        }
 	        finally {
-	            if (jedis != null) {
-	                jedis.close();
-	            }
+//	            if (jedis != null) {
+//	                try {
+//						jedis.close();
+//					} catch (IOException e) {}
+//	            }
 	        }
         } while(!done);
 

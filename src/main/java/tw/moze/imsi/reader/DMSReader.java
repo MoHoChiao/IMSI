@@ -30,14 +30,18 @@ public class DMSReader implements Closeable {
 //	private RedisSubscriber subscriber;
 
 	private String[] dirForRead = new String[] {
-			"/data/imsi_mapping/src/dms/10.108.61.155",
-			"/data/imsi_mapping/src/dms/10.108.61.167",
+			"C:/Users/User/Downloads/data/imsi_mapping/src/dms/10.108.61.155",
+			"C:/Users/User/Downloads/data/imsi_mapping/src/dms/10.108.61.167",
+//			"/data/imsi_mapping/src/dms/10.108.61.155",
+//			"/data/imsi_mapping/src/dms/10.108.61.167",
 	};
 
 	// filter 完不須對應的欄位之後的檔案會放置此處
 	private String[] dirForFiltered = new String[] {
-			"/data/imsi_mapping/filtered/dms/10.108.61.155",
-			"/data/imsi_mapping/filtered/dms/10.108.61.167",
+			"C:/Users/User/Downloads/data/imsi_mapping/filtered/dms/10.108.61.155",
+			"C:/Users/User/Downloads/data/imsi_mapping/filtered/dms/10.108.61.167",
+//			"/data/imsi_mapping/filtered/dms/10.108.61.155",
+//			"/data/imsi_mapping/filtered/dms/10.108.61.167",
 	};
 
 	private String filePattern = "s1ap_1*.csv";
