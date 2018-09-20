@@ -37,9 +37,9 @@ public class DirLister {
 		for (File f: items) {
 			String fullPath = f.getAbsolutePath();
 			if (f.isFile()) {
-				if (f.lastModified() < mofifyAfter) {
-					continue;
-				}
+//				if (f.lastModified() < mofifyAfter) {
+//					continue;
+//				}
 
 				if (filter.accept(f.getParentFile(), f.getName())) {
 					files.add(fullPath);
