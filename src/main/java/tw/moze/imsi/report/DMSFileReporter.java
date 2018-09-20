@@ -13,8 +13,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.Response;
 import tw.moze.imsi.redis.RedisUtil;
 import tw.moze.imsi.util.StatFile;
@@ -23,7 +22,8 @@ import tw.moze.util.dev.XXX;
 import tw.moze.util.fileformat.FieldCSVReader;
 import tw.moze.util.fileutil.FileUtils;
 import tw.moze.util.json.JsonUtil;
-import tw.moze.util.redis.RedisBatchRunner2;
+import tw.moze.imsi.redis.JedisClusterPipeline;
+import tw.moze.imsi.redis.RedisBatchRunner2;
 
 public class DMSFileReporter implements Runnable {
 	private CountUpDownLatch latch;
@@ -108,7 +108,7 @@ public class DMSFileReporter implements Runnable {
 	}
 
 	private void checkCSV(Map<String, Integer> stat) {
-		Jedis jedis = null;
+		JedisCluster jedis = null;
 		matched = 0;
 		try {
 			reader = new FieldCSVReader(new FileReader(csvFile));
@@ -138,7 +138,7 @@ public class DMSFileReporter implements Runnable {
 			StatFile.save(statFile.getAbsolutePath(), stat);
 
 			safeClose(reader);
-			safeClose(jedis);
+//			safeClose(jedis);
 		}
 	}
 
@@ -174,12 +174,12 @@ public class DMSFileReporter implements Runnable {
 	}
 
 	class DMSRecallRunner extends RedisBatchRunner2<Response<String>> {
-		public DMSRecallRunner(Jedis jedis, int batchSize) {
+		public DMSRecallRunner(JedisCluster jedis, int batchSize) {
 			super(jedis, batchSize);
 		}
 
 		@Override
-		public void invoke(Pipeline pipeline, String[] vals, List<Response<String>> results) {
+		public void invoke(JedisClusterPipeline pipeline, String[] vals, List<Response<String>> results) {
 			String mme_id    = reader.get("MME UE S1AP ID(int64)", vals);
 			String enb_id    = reader.get("eNB UE S1AP ID(int64)", vals);
 
