@@ -30,18 +30,18 @@ public class DMSReader implements Closeable {
 //	private RedisSubscriber subscriber;
 
 	private String[] dirForRead = new String[] {
-			"C:/Users/User/Downloads/data/imsi_mapping/src/dms/10.108.61.155",
-			"C:/Users/User/Downloads/data/imsi_mapping/src/dms/10.108.61.167",
-//			"/data/imsi_mapping/src/dms/10.108.61.155",
-//			"/data/imsi_mapping/src/dms/10.108.61.167",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/src/dms/10.108.61.155",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/src/dms/10.108.61.167",
+			"/data/imsi_mapping_cluster_v1/src/dms/10.108.61.155",
+			"/data/imsi_mapping_cluster_v1/src/dms/10.108.61.167",
 	};
 
 	// filter 完不須對應的欄位之後的檔案會放置此處
 	private String[] dirForFiltered = new String[] {
-			"C:/Users/User/Downloads/data/imsi_mapping/filtered/dms/10.108.61.155",
-			"C:/Users/User/Downloads/data/imsi_mapping/filtered/dms/10.108.61.167",
-//			"/data/imsi_mapping/filtered/dms/10.108.61.155",
-//			"/data/imsi_mapping/filtered/dms/10.108.61.167",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.155",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.167",
+			"/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.155",
+			"/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.167",
 	};
 
 	private String filePattern = "s1ap_1*.csv";
@@ -81,8 +81,13 @@ public class DMSReader implements Closeable {
 				return;
 			isRunning = true;
 		}
-
-		processAll();
+		
+		try {
+			processAll();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		isRunning = false;
 		prevEventTime = System.currentTimeMillis();
 

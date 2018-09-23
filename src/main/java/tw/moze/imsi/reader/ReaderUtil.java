@@ -48,7 +48,7 @@ public class ReaderUtil {
 		return new File(path).lastModified()/1000;
 	}
 	public static void main(String[] args) {
-		String path = "/data/imsi_mapping/src/dms/s1ap_1_prb_MSP6000-12251_ipx_reports_data_1526844900_60_0_7.csv";
+		String path = "/data/imsi_mapping_cluster_v1/src/dms/s1ap_1_prb_MSP6000-12251_ipx_reports_data_1526844900_60_0_7.csv";
 		System.out.println(getDMSFileTime(path));
 		System.out.println(getLSRFileTime(path));
 	}

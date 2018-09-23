@@ -8,7 +8,7 @@ import csv
 import os
 import sendmail
 
-lsrdir = "/data/imsi_mapping/mapped/lsr/"
+lsrdir = "/data/imsi_mapping_cluster_v1/mapped/lsr/"
 
 # d:\data\imsi_mapping\mapped\lsr\lsrreport.2017-11-07.csv
 

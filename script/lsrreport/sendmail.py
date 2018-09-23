@@ -110,7 +110,7 @@ def sendMail(subject, content, attach, flag):
 def sendAlert():
     subject = "ISMI Mapping Alert Mail"
     content = "ISMI Mapping rate for last hour is less than 70%.\nAttached please find IMSI Mapping alert file."
-    lsrdir = "/data/imsi_mapping/mapped/lsr/"
+    lsrdir = "/data/imsi_mapping_cluster_v1/mapped/lsr/"
     attach = lsrdir + "imsi_rate.txt"
     sendMail(subject, content, attach, False);
 
@@ -119,7 +119,7 @@ def sendReport():
     content = "Attached please find IMSI Mapping report file."
     today = time.strftime("%Y-%m-%d", time.localtime())
 
-    lsrdir = "/data/imsi_mapping/mapped/lsr/"
+    lsrdir = "/data/imsi_mapping_cluster_v1/mapped/lsr/"
     attach = lsrdir + "userreport_daily.%s.csv" % (today)
     imsi_rate = getYesterdayImsiRate(attach)
     print ("imsi_rate=", imsi_rate)

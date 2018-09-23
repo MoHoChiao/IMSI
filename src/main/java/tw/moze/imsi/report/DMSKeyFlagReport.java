@@ -25,8 +25,8 @@ import tw.moze.util.json.JsonUtil;
 public class DMSKeyFlagReport implements Closeable {
 	// src file mapping 完後會移到此處
 	private String[] dirForFiltered = new String[] {
-		"/data/imsi_mapping/filtered/dms/10.108.61.155",
-		"/data/imsi_mapping/filtered/dms/10.108.61.167",
+		"/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.155",
+		"/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.167",
 	};
 
 	public DMSKeyFlagReport() {
@@ -71,7 +71,7 @@ public class DMSKeyFlagReport implements Closeable {
 		}
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String reportPath  = "/data/imsi_mapping/filtered/dms/dmsreport." + sdf.format(new Date())+ "." + keyFlag + ".csv";
+		String reportPath  = "/data/imsi_mapping_cluster_v1/filtered/dms/dmsreport." + sdf.format(new Date())+ "." + keyFlag + ".csv";
 
 		XXX.out("Sorting report items: " + list.size());
 		Collections.sort(list, comp);

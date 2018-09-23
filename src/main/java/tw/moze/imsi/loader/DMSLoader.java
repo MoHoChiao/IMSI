@@ -80,8 +80,8 @@ public class DMSLoader implements Closeable {
 		// 其中 %d 部分是 unix time, 精度到秒 Java 的 System.currentTimeMillis() 要除以 1000 樣式才一致
 
 		String[] pathPairs = new String[] {
-				"hammer@10.108.61.155:/ftproot/forwarding/::/data/imsi_mapping/src/dms/10.108.61.155",
-				"hammer@10.108.61.167:/ftproot/forwarding/::/data/imsi_mapping/src/dms/10.108.61.167"
+				"hammer@10.108.61.155:/ftproot/forwarding/::/data/imsi_mapping_cluster_v1/src/dms/10.108.61.155",
+				"hammer@10.108.61.167:/ftproot/forwarding/::/data/imsi_mapping_cluster_v1/src/dms/10.108.61.167"
 		};
 
 		CountUpDownLatch latch = new CountUpDownLatch();
@@ -149,8 +149,8 @@ public class DMSLoader implements Closeable {
 
 
 		public RsyncRunable(CountUpDownLatch latch, String remotePath, String localPath, String filePattternWithTime) {
-			// rsync -rzvh --include 's1ap_1*' --exclude '*' hammer@10.108.61.155:/ftproot/forwarding/ /data/imsi_mapping/src/dms/10.108.61.155
-			// rsync -rzvh --include 's1ap_1*' --exclude '*' hammer@10.108.61.167:/ftproot/forwarding/ /data/imsi_mapping/src/dms/10.108.61.167
+			// rsync -rzvh --include 's1ap_1*' --exclude '*' hammer@10.108.61.155:/ftproot/forwarding/ /data/imsi_mapping_cluster_v1/src/dms/10.108.61.155
+			// rsync -rzvh --include 's1ap_1*' --exclude '*' hammer@10.108.61.167:/ftproot/forwarding/ /data/imsi_mapping_cluster_v1/src/dms/10.108.61.167
 
 			this.latch = latch;
 			cmd = new String[] { "rsync", "-rzvht", "--include", filePattternWithTime,

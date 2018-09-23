@@ -54,9 +54,9 @@ public class LSRLoader implements Closeable {
 		Stopwatch sw = Stopwatch.create();
 
 		String[] pathPairs = new String[] {
-				"root@10.108.200.141:/var/lib/truecall/COMMON_LTE/csv/::/data/imsi_mapping/src/lsr/10.108.200.141/",
-				"root@10.108.200.142:/var/lib/truecall/COMMON_LTE/csv/::/data/imsi_mapping/src/lsr/10.108.200.142/",
-				"root@10.108.200.143:/var/lib/truecall/COMMON_LTE/csv/::/data/imsi_mapping/src/lsr/10.108.200.143/"
+				"root@10.108.200.141:/var/lib/truecall/COMMON_LTE/csv/::/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.141/",
+				"root@10.108.200.142:/var/lib/truecall/COMMON_LTE/csv/::/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.142/",
+				"root@10.108.200.143:/var/lib/truecall/COMMON_LTE/csv/::/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.143/"
 		};
 		// 來源目錄結構檔名結構是 yyMMdd/HH/yyyyMMddHH.{unix_time_sec}.csv
 		// 抓本小時及前一小時的檔案目錄
@@ -124,9 +124,9 @@ public class LSRLoader implements Closeable {
 
 
 		public RsyncRunable(CountUpDownLatch latch, String remotePath, String localPath) {
-//			rsync -rvh root@10.108.200.141:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping/src/lsr/10.108.200.141/yyMMdd/HH
-//			rsync -rvh root@10.108.200.142:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping/src/lsr/10.108.200.142/yyMMdd/HH
-//			rsync -rvh root@10.108.200.143:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping/src/lsr/10.108.200.143/yyMMdd/HH
+//			rsync -rvh root@10.108.200.141:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping_cluster_v1/src/lsr/10.108.200.141/yyMMdd/HH
+//			rsync -rvh root@10.108.200.142:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping_cluster_v1/src/lsr/10.108.200.142/yyMMdd/HH
+//			rsync -rvh root@10.108.200.143:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping_cluster_v1/src/lsr/10.108.200.143/yyMMdd/HH
 			this.latch = latch;
 			cmd = new String[] {"rsync", "-rvht", remotePath, localPath};
 			this.localPath = localPath;

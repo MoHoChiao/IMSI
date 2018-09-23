@@ -27,20 +27,25 @@ public class LSRReader implements Closeable {
 //	private RedisSubscriber subscriber;
 
 	private String[] dirForRead = new String[] {
-			"/data/imsi_mapping/src/lsr/10.108.200.141/",
-			"/data/imsi_mapping/src/lsr/10.108.200.142/",
-			"/data/imsi_mapping/src/lsr/10.108.200.143/",
-
-//			rsync -rvh root@10.108.200.141:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping/src/lsr/10.108.200.141/yyMMdd/HH
-//			rsync -rvh root@10.108.200.142:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping/src/lsr/10.108.200.142/yyMMdd/HH
-//			rsync -rvh root@10.108.200.143:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping/src/lsr/10.108.200.143/yyMMdd/HH
+			"/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.141/",
+			"/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.142/",
+			"/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.143/",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.141",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.142",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.143",
+//			rsync -rvh root@10.108.200.141:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping_cluster_v1/src/lsr/10.108.200.141/yyMMdd/HH
+//			rsync -rvh root@10.108.200.142:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping_cluster_v1/src/lsr/10.108.200.142/yyMMdd/HH
+//			rsync -rvh root@10.108.200.143:/var/lib/truecall/COMMON_LTE/csv/yyMMdd/HH /data/imsi_mapping_cluster_v1/src/lsr/10.108.200.143/yyMMdd/HH
 	};
 
 	// src file mapping 完後會移到此處
 	private String[] dirForMapped = new String[] {
-			"/data/imsi_mapping/mapped/lsr/10.108.200.141/",
-			"/data/imsi_mapping/mapped/lsr/10.108.200.142/",
-			"/data/imsi_mapping/mapped/lsr/10.108.200.143/",
+			"/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.141/",
+			"/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.142/",
+			"/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.143/",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.141",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.142",
+//			"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.143",
 	};
 
 	private Map<String, Long> fileSizeMap;

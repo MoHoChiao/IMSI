@@ -15,7 +15,7 @@ import csv
 import os
 import sys
 
-basedir = "/data/imsi_mapping/mapped"
+basedir = "/data/imsi_mapping_cluster_v1/mapped"
 dmsdir = basedir + "/dms/"
 lsrdir = basedir + "/lsr/"
 

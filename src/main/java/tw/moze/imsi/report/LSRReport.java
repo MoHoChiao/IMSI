@@ -22,9 +22,9 @@ import tw.moze.util.json.JsonUtil;
 public class LSRReport {
 	// src file mapping 完後會移到此處
 	private String[] dirForMapped = new String[] {
-			"/data/imsi_mapping/mapped/lsr/10.108.200.141/",
-			"/data/imsi_mapping/mapped/lsr/10.108.200.142/",
-			"/data/imsi_mapping/mapped/lsr/10.108.200.143/",
+			"/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.141/",
+			"/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.142/",
+			"/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.143/",
 	};
 
 	private String filePattern = "*.stat.json";
@@ -110,10 +110,10 @@ public class LSRReport {
 				map.put("KEY NO IMEI Mapping Rate", Math.round((KeyNoImeiMappinfCount/total)*10000)/100d + "%");
 				map.put("IMEI NO KEY Mapping Rate", Math.round((ImeiNoKeyMappinfCount/total)*10000)/100d + "%");
 
-				String filepath = file.substring("/data/imsi_mapping/mapped/lsr/".length(), file.length()-"stat.json".length()) + "csv";
+				String filepath = file.substring("/data/imsi_mapping_cluster_v1/mapped/lsr/".length(), file.length()-"stat.json".length()) + "csv";
 				map.put("File Path", filepath);
 				map.put("File Time", getFileTime(filepath));
-				map.put("Sync Time", getSyncTime("/data/imsi_mapping/src/lsr/" + filepath + ".gz"));
+				map.put("Sync Time", getSyncTime("/data/imsi_mapping_cluster_v1/src/lsr/" + filepath + ".gz"));
 
 				list.add(map);
 			} catch (IOException e) {
@@ -125,7 +125,7 @@ public class LSRReport {
 			return;
 		}
 
-		String reportPath  = "/data/imsi_mapping/mapped/lsr/lsrreport." + sdf.format(new Date())+ ".csv";
+		String reportPath  = "/data/imsi_mapping_cluster_v1/mapped/lsr/lsrreport." + sdf.format(new Date())+ ".csv";
 		XXX.out("Sorting report items: " + list.size());
 		Collections.sort(list, comp);
 
@@ -173,7 +173,7 @@ public class LSRReport {
 		if (ret.isEmpty())
 			return;
 		////
-		String reportPath  = "/data/imsi_mapping/mapped/lsr/lsrreport_daily." + sdf.format(new Date())+ ".csv";
+		String reportPath  = "/data/imsi_mapping_cluster_v1/mapped/lsr/lsrreport_daily." + sdf.format(new Date())+ ".csv";
 		ReportUtil.writeReport(ret, reportPath);
 	}
 

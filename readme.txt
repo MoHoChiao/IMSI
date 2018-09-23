@@ -3,17 +3,17 @@
 IMSI Query 的設計
 
 src folder:
-	/data/imsi_mapping/src/lsr/10.108.200.141/
-	/data/imsi_mapping/src/lsr/10.108.200.142/
-	/data/imsi_mapping/src/lsr/10.108.200.143/
+	/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.141/
+	/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.142/
+	/data/imsi_mapping_cluster_v1/src/lsr/10.108.200.143/
 	
 	sub folder and file name structure
 	yyMMdd/HH/yyyyMMddHH.{unix_time_sec}.csv.gz
 	
 mapped folder:
-	/data/imsi_mapping/mapped/lsr/10.108.200.141/
-	/data/imsi_mapping/mapped/lsr/10.108.200.142/
-	/data/imsi_mapping/mapped/lsr/10.108.200.143/
+	/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.141/
+	/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.142/
+	/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.143/
 
 	sub folder and file name structure
 	yyMMdd/HH/yyyyMMddHH.{unix_time_sec}.csv
