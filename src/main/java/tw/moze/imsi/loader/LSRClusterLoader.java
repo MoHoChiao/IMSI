@@ -22,11 +22,11 @@ import tw.moze.util.concurrent.ExecutorBuilder;
 import tw.moze.util.dev.XXX;
 import tw.moze.util.time.Stopwatch;
 
-public class LSRLoader implements Closeable {
+public class LSRClusterLoader implements Closeable {
 	private ThreadPoolExecutor tp;
 	private volatile long lastRun = 0;
 	private volatile boolean isRunning = false;
-	public LSRLoader() {
+	public LSRClusterLoader() {
 		tp = ExecutorBuilder.newCachedThreadPool(6);
 		RedisUtil.initPool();
 
@@ -162,7 +162,7 @@ public class LSRLoader implements Closeable {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		final LSRLoader loader = new LSRLoader();
+		final LSRClusterLoader loader = new LSRClusterLoader();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 		    @Override
 			public void run() {

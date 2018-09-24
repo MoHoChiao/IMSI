@@ -22,14 +22,14 @@ import tw.moze.util.fileutil.FileExtUtils;
 import tw.moze.util.fileutil.FileUtils;
 import tw.moze.util.json.JsonUtil;
 
-public class DMSKeyFlagReport implements Closeable {
+public class DMSClusterKeyFlagReport implements Closeable {
 	// src file mapping 完後會移到此處
 	private String[] dirForFiltered = new String[] {
 		"/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.155",
 		"/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.167",
 	};
 
-	public DMSKeyFlagReport() {
+	public DMSClusterKeyFlagReport() {
 	}
 
 	public void process() {
@@ -152,7 +152,7 @@ public class DMSKeyFlagReport implements Closeable {
 //	}
 
 	public static void main(String[] args) {
-		final DMSKeyFlagReport report = new DMSKeyFlagReport();
+		final DMSClusterKeyFlagReport report = new DMSClusterKeyFlagReport();
 		report.process();
 		try {
     		report.close();

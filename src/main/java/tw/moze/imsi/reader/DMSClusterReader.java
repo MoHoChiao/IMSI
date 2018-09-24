@@ -26,7 +26,7 @@ import tw.moze.util.time.Stopwatch;
  *
  */
 //public class DMSReader extends JedisPubSub implements Closeable {
-public class DMSReader implements Closeable {
+public class DMSClusterReader implements Closeable {
 //	private RedisSubscriber subscriber;
 
 	private String[] dirForRead = new String[] {
@@ -50,7 +50,7 @@ public class DMSReader implements Closeable {
 	private Map<String, Long> fileSizeMap;
 	private ThreadPoolExecutor tp;
 
-	public DMSReader() {
+	public DMSClusterReader() {
 		fileSizeMap = new ExpiringMap<>(60*2);
 		tp = ExecutorBuilder.newCachedThreadPool(16);
 		RedisUtil.initPool();
@@ -76,7 +76,7 @@ public class DMSReader implements Closeable {
 		long now = System.currentTimeMillis();
 
 		// if the event comes too close, just ignore it
-		synchronized (DMSReader.class) {
+		synchronized (DMSClusterReader.class) {
 			if (isRunning || now - prevEventTime < 5 * 1000L)
 				return;
 			isRunning = true;
@@ -194,7 +194,7 @@ public class DMSReader implements Closeable {
 	}
 
 	public static void main(String[] args) {
-		final DMSReader reader = new DMSReader();
+		final DMSClusterReader reader = new DMSClusterReader();
 		reader.guardedProcessAll();
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {

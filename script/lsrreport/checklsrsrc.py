@@ -26,7 +26,8 @@ def getMsg(sender, receiver, subject, content):
 def sendMail(subject, content, flag):
     fromaddr = "noc-pmats@aptg.com.tw"
     #toaddrs  = ["maxhuang@aptg.com.tw"]
-    toaddrs  = "maxhuang@aptg.com.tw" #for python 2.x compability
+    #toaddrs  = "maxhuang@aptg.com.tw" #for python 2.x compability
+    toaddrs  = fromaddr
     #from = noc-pmats@aptg.com.tw
     #name = 效能分析暨技術支援組
     #黃志煜 <maxhuang@aptg.com.tw>

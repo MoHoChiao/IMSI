@@ -22,7 +22,7 @@ import tw.moze.util.dev.XXX;
 import tw.moze.util.fileutil.DirLister;
 import tw.moze.util.fileutil.FileExtUtils;
 
-public class DMSReport implements Closeable {
+public class DMSClusterReport implements Closeable {
 	// src file mapping 完後會移到此處
 	private String[] dirForFiltered = new String[] {
 //		"C:/Users/User/Downloads/data/imsi_mapping_cluster_v1/filtered/dms/10.108.61.155",
@@ -35,7 +35,7 @@ public class DMSReport implements Closeable {
 
 	private String filePattern = "*.stat.json";
 
-	public DMSReport() {
+	public DMSClusterReport() {
 		tp = ExecutorBuilder.newCachedThreadPool(6);
 		RedisUtil.initPool();
 	}
@@ -232,7 +232,7 @@ public class DMSReport implements Closeable {
 	};
 
 	public static void main(String[] args) {
-		final DMSReport report = new DMSReport();
+		final DMSClusterReport report = new DMSClusterReport();
 		report.process();
 		try {
     		report.close();

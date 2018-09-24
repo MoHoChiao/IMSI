@@ -1,2 +1,2 @@
 #!/bin/bash
-kill $(ps aux | grep  '[L]SRReader' | awk '{print $2}')
+kill $(ps aux | grep  '[L]SRClusterReader' | awk '{print $2}')

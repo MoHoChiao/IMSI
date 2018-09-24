@@ -23,7 +23,7 @@ import tw.moze.util.fileutil.DirLister;
 import tw.moze.util.time.Stopwatch;
 
 //public class LSRReader extends JedisPubSub implements Closeable {
-public class LSRReader implements Closeable {
+public class LSRClusterReader implements Closeable {
 //	private RedisSubscriber subscriber;
 
 	private String[] dirForRead = new String[] {
@@ -54,7 +54,7 @@ public class LSRReader implements Closeable {
 	private ThreadPoolExecutor tp;
 	private SimpleDateFormat dfToSec = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	public LSRReader() {
+	public LSRClusterReader() {
 		fileSizeMap = new ExpiringMap<>(60*5); // 5 分鐘
 		tp = ExecutorBuilder.newCachedThreadPool(6);
 		RedisUtil.initPool();
@@ -186,7 +186,7 @@ public class LSRReader implements Closeable {
 		// if the event comes too close, just ignore it
 		// 2018-0530 其實底下這個不用防止重複執行有 overlap 的情況了，
 		// 因為我們現在只有使用 timer, 而 timer 是不會有時間 overlap 的
-		synchronized (LSRReader.class) {
+		synchronized (LSRClusterReader.class) {
 			if (isRunning || now - prevEventTime < 30 * 1000L)
 				return;
 			isRunning = true;
@@ -210,7 +210,7 @@ public class LSRReader implements Closeable {
 	}
 
 	public static void main(String[] args) {
-		final LSRReader reader = new LSRReader();
+		final LSRClusterReader reader = new LSRClusterReader();
 		reader.guardedProcessAll();
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {

@@ -28,13 +28,13 @@ import tw.moze.util.time.Stopwatch;
  * @author edward
  *
  */
-public class DMSLoader implements Closeable {
+public class DMSClusterLoader implements Closeable {
 	private int hoursToGrep = 1;
 	private ThreadPoolExecutor tp;
 	private volatile long lastRun = 0;
 	private volatile boolean isRunning = false;
 
-	public DMSLoader() {
+	public DMSClusterLoader() {
 		tp = ExecutorBuilder.newCachedThreadPool(6);
 //		RedisUtil.initPool();
 
@@ -199,7 +199,7 @@ public class DMSLoader implements Closeable {
 	}
 
 	public static void main(String[] argv) throws InterruptedException {
-		final DMSLoader loader = new DMSLoader();
+		final DMSClusterLoader loader = new DMSClusterLoader();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 		    @Override
 			public void run() {

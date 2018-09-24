@@ -1,21 +1,35 @@
 ## crontab 171
 [root@NK-IMSIServer01 lsrreport]# crontab -l
 #min hour day month weekday command
+0    *    *    *    *       /data/imsi_mapping/app/lsrreport/run.sh && python /data/imsi_mapping/app/lsrreport/checkalert.py
 0    *    *    *    *       /data/imsi_mapping_cluster_v1/app/lsrreport/run.sh && python /data/imsi_mapping_cluster_v1/app/lsrreport/checkalert.py
+30   0    *    *    *       /data/imsi_mapping/app/lsrreport/housekeeping.sh
 30   0    *    *    *       /data/imsi_mapping_cluster_v1/app/lsrreport/housekeeping.sh
+*/5  *    *    *    *       /data/imsi_mapping/app/lsrreader/run.sh
 */5  *    *    *    *       /data/imsi_mapping_cluster_v1/app/lsrreader/run.sh
+*/5  *    *    *    *       /data/imsi_mapping/app/lsrloader/run.sh
 */5  *    *    *    *       /data/imsi_mapping_cluster_v1/app/lsrloader/run.sh
+20   *    *    *    *       rsync -vht root@10.108.61.129:/data/imsi_mapping/filtered/dms/* /data/imsi_mapping/mapped/dms/
 20   *    *    *    *       rsync -vht root@10.108.61.129:/data/imsi_mapping_cluster_v1/filtered/dms/* /data/imsi_mapping_cluster_v1/mapped/dms/
+30   7    *    *    *       python /data/imsi_mapping/app/lsrreport/genuserreport.py && python /data/imsi_mapping/app/lsrreport/sendmail.py
 30   7    *    *    *       python /data/imsi_mapping_cluster_v1/app/lsrreport/genuserreport.py && python /data/imsi_mapping_cluster_v1/app/lsrreport/sendmail.py
+*/1  *    *    *    *       find /data/imsi_mapping/mapped/lsr/10.108.200.141 -mmin -120 -type f -name "*.csv" -exec rsync -trvh {} /data/imsi_mapping/mapped/lsr/all/ \;
 */1  *    *    *    *       find /data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.141 -mmin -120 -type f -name "*.csv" -exec rsync -trvh {} /data/imsi_mapping_cluster_v1/mapped/lsr/all/ \;
+*    */1  *    *    *       python /data/imsi_mapping/app/lsrreport/checklsrsrc.py /data/imsi_mapping/src/lsr 30
 *    */1  *    *    *       python /data/imsi_mapping_cluster_v1/app/lsrreport/checklsrsrc.py /data/imsi_mapping_cluster_v1/src/lsr 30
 
 ## crontab 129
 [root@NH-IMSIServer01 ~]# crontab -l
 #min hour day month weekday command
+15   *    *    *    *       /data/imsi_mapping/app/dmsreport/kfrun.sh
 15   *    *    *    *       /data/imsi_mapping_cluster_v1/app/dmsreport/kfrun.sh
+0    *    *    *    *       /data/imsi_mapping/app/dmsreport/run.sh
 0    *    *    *    *       /data/imsi_mapping_cluster_v1/app/dmsreport/run.sh
+30   0    *    *    *       /data/imsi_mapping/app/dmsreport/housekeeping.sh
 30   0    *    *    *       /data/imsi_mapping_cluster_v1/app/dmsreport/housekeeping.sh
+*/5  *    *    *    *       /data/imsi_mapping/app/dmsreader/run.sh
 */5  *    *    *    *       /data/imsi_mapping_cluster_v1/app/dmsreader/run.sh
+*/5  *    *    *    *       /data/imsi_mapping/app/dmsloader/run.sh
 */5  *    *    *    *       /data/imsi_mapping_cluster_v1/app/dmsloader/run.sh
+*    */1  *    *    *       python /data/imsi_mapping/app/dmsreport/checkdmssrc.py /data/imsi_mapping/src/dms 30
 *    */1  *    *    *       python /data/imsi_mapping_cluster_v1/app/dmsreport/checkdmssrc.py /data/imsi_mapping_cluster_v1/src/dms 30

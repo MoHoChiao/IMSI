@@ -19,7 +19,7 @@ import tw.moze.util.fileutil.DirLister;
 import tw.moze.util.fileutil.FileUtils;
 import tw.moze.util.json.JsonUtil;
 
-public class LSRReport {
+public class LSRClusterReport {
 	// src file mapping 完後會移到此處
 	private String[] dirForMapped = new String[] {
 			"/data/imsi_mapping_cluster_v1/mapped/lsr/10.108.200.141/",
@@ -30,7 +30,7 @@ public class LSRReport {
 	private String filePattern = "*.stat.json";
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-	public LSRReport() {
+	public LSRClusterReport() {
 
 	}
 
@@ -213,7 +213,7 @@ public class LSRReport {
 	};
 
 	public static void main(String[] args) {
-		LSRReport report = new LSRReport();
+		LSRClusterReport report = new LSRClusterReport();
 		report.process();
 	}
 

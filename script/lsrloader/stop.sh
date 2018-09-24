@@ -1,2 +1,2 @@
 #!/bin/bash
-kill $(ps aux | grep  '[L]SRLoader' | awk '{print $2}')
+kill $(ps aux | grep  '[L]SRClusterLoader' | awk '{print $2}')

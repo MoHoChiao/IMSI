@@ -1,2 +1,2 @@
 #!/bin/bash
-kill $(ps aux | grep  '[D]MSLoader' | awk '{print $2}')
+kill $(ps aux | grep  '[D]MSClusterLoader' | awk '{print $2}')
