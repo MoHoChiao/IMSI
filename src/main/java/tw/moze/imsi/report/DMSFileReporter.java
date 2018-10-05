@@ -46,7 +46,7 @@ public class DMSFileReporter implements Runnable {
 		try {
 			Map<String, Integer> stat = readStat();
 			// 如果檔案時間在 80 分鐘以內，會重新計算 stat.json
-			if (System.currentTimeMillis() - csvFile.lastModified() < 80 * 60 * 1000) {
+			if (csvFile.exists() &&  System.currentTimeMillis() - csvFile.lastModified() < 80 * 60 * 1000) {
 				checkCSV(stat);
 			}
 			list.add(computeStat(stat));
@@ -98,7 +98,7 @@ public class DMSFileReporter implements Runnable {
 		map.put("Match Rate", Math.round(matchRate*10000)/100d + "%");
 		map.put("File Path", filename);
 		map.put("File Time", getFileTime(filename));
-		map.put("Sync Time", getSyncTime(csvFile));
+//		map.put("Sync Time", getSyncTime(csvFile));
 		return map;
 	}
 

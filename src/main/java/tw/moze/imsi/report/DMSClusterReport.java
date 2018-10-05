@@ -195,9 +195,9 @@ public class DMSClusterReport implements Closeable {
 		for (String file: files) {
 			File statFile = new File(file);
 			File csvFile = FileExtUtils.replaceExtension(statFile, ".stat.json", ".csv");
-			if (!csvFile.exists()) {
-				continue;
-			}
+//			if (!csvFile.exists()) {  // csv 與 json 檔刪除時間不一樣
+//				continue;
+//			}
 			Runnable job = new DMSFileReporter(latch, statFile, csvFile, list);
 			jobs.add(job);
 		}

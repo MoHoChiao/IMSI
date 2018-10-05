@@ -52,9 +52,9 @@ public class DMSClusterKeyFlagReport implements Closeable {
 		for (String file: files) {
 			File statFile = new File(file);
 			File csvFile = FileExtUtils.replaceExtension(statFile, ".stat.XX.json", ".csv");
-			if (!csvFile.exists()) {
-				continue;
-			}
+//			if (!csvFile.exists()) {  // csv 與 json 檔刪除時間不一樣
+//				continue;
+//			}
 			try {
 				Map<String, Integer> stat = readStat(file);
 				Map<String, String> stat2 = computeStat(stat, csvFile);
@@ -92,7 +92,7 @@ public class DMSClusterKeyFlagReport implements Closeable {
 
 		map.put("File Path", filename);
 		map.put("File Time", getFileTime(filename));
-		map.put("Sync Time", getSyncTime(csvFile));
+//		map.put("Sync Time", getSyncTime(csvFile));
 
 		return map;
 	}
@@ -115,10 +115,10 @@ public class DMSClusterKeyFlagReport implements Closeable {
 		return "";
 	}
 
-	private String getSyncTime(File f) {
-		long l = f.lastModified();
-		return sdf2.format(new Date(l));
-	}
+//	private String getSyncTime(File f) {
+//		long l = f.lastModified();
+//		return sdf2.format(new Date(l));
+//	}
 
 	@Override
 	public void close() throws IOException {
